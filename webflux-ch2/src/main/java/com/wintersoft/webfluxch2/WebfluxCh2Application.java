@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WebfluxCh2Application {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(WebfluxCh2Application.class, args);
 	}
 

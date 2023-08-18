@@ -10,8 +10,6 @@ spring:
       authentication-database: admin
 
 spring.webflux.hiddenmethod.filter.enabled: true
-logging:
-  level:
-    org:
-      springframework:
-        data: trace
+spring.devtools.restart.exclude: static/**, public/**
+
+logging.level.web: DEBUG

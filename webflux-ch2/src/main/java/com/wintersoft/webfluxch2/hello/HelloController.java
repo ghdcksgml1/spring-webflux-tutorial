@@ -33,8 +33,10 @@ public class HelloController {
 
     @GetMapping
     Mono<Rendering> home() {
+
         return Mono.just(Rendering.view("home.html")
-                .modelAttribute("items", this.itemRepository.findAll())
+                .modelAttribute("items", this.itemRepository.findAll()
+                        .doOnNext(System.out::println))
                 .modelAttribute("cart", this.cartRepository.findById("My Cart")
                         .switchIfEmpty(this.cartRepository.save(new Cart("My Cart"))))
                 .build());
