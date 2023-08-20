@@ -8,10 +8,7 @@ import com.wintersoft.webfluxch2.item.Item;
 import com.wintersoft.webfluxch2.item.ItemRepository;
 import com.wintersoft.webfluxch2.item.ItemService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.result.view.Rendering;
 import reactor.core.publisher.Mono;
 
@@ -60,5 +57,11 @@ public class HelloController {
                 .modelAttribute("cart", this.cartRepository.findById("My Cart")
                         .switchIfEmpty(this.cartRepository.save(new Cart("My Cart"))))
                 .build());
+    }
+
+    @DeleteMapping("/delete/{itemId}")
+    Mono<String> delete(@PathVariable("itemId") String itemId) {
+        return this.itemService.delete("My Cart", itemId)
+                .thenReturn("redirect:/");
     }
 }
